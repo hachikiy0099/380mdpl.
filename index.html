@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Story at 380mdpl</title>
+    <!-- Menghubungkan file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <!-- Frame 1 --> 
+    <div class="frame" id="frame1">
+      <img src="Frame 1.jpg" alt="Frame 1">
+      <div class="content">
+        <button class="button" onclick="nextFrame('frame4')">Next</button>
+      </div>
+    </div>
+
+    <!-- Frame 4 (Play Music) -->
+    <div class="frame" id="frame4">
+      <img src="Frame 4.jpg" alt="Frame 4">
+      <div class="title-music">Click to Play Music>
+        <div class="content">
+        <button class="button" onclick="playMusic()">Play Music</button>  
+        <button class="button" onclick="nextFrame('frame2')">Next</button> <!-- ini akan menuju frame 2 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Frame 2 -->
+    <div class="frame" id="frame2">
+      <img src="Frame 2.jpg" alt="Frame 2">
+      <div class="content">
+        <button class="button button-frame2" onclick="nextFrame('frame7')">Next</button>
+      </div>
+    </div>
+
+    <!-- Frame 3 -->
+    <div class="frame" id="frame7">
+       <img src="Frame 7.jpg" alt="Frame 7">
+    </div>
+
+    <audio id="bg-music" loop>
+      <source src="About You.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+      // Show Frame 1 on load 
+      window.onload = function() {
+        document.getElementById('frame1').style.display = 'flex';
+      }
+
+      function nextFrame(frameId) {
+        const frames = document.querySelectorAll('.frame');
+        frames.forEach(f => f.style.display = 'none');
+        document.getElementById(frameId).style.display = 'flex';
+      } 
+
+      function playMusic() {
+        const music = document.getElementById("bg-music");
+        const musicTitle = "About You-The 1975";
+        
+        // Tampilkan alert dengan judul musik
+        alert(`Sedang memutar: ${musicTitle}`);
+
+        // Play musik setelah alert ditutup 
+        music.play().catch(e => {
+          console.log("Audio playback failed:", e);
+          alert("Stop The Music.")
+        })
+      }
+    </script>
+  </body>
+</html>
